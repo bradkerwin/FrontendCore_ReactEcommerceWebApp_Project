@@ -26,9 +26,9 @@ class NewProduct extends Component {
 
 
             const productData = {
-                productName: this.state.productName.trim(),
+                product_name: this.state.productName.trim(),
                 price: this.state.price.trim(),
-                productDetails: this.state.productDetails.trim()
+                product_details: this.state.productDetails.trim()
             };
 
             axios.post('http://127.0.0.1:5000/products', productData)
@@ -58,8 +58,8 @@ class NewProduct extends Component {
     };
 
     handleChange = (event) => {
-        const { productName, value } = event.target;
-        this.setState({ [productName]: value });
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
     };
 
     closeModal = () => {

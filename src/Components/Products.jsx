@@ -54,10 +54,10 @@ class ProductList extends Component {
                             <Card style={{ width: '18rem' }}>
                                 <Card.Img variant="top" src="holder.js/100px180" />
                                 <Card.Body>
-                                    <Card.Title>{product.productName}</Card.Title>
+                                    <Card.Title>{product.product_name}</Card.Title>
                                     <Card.Text>
                                         {product.price} <br/>
-                                        {product.productDetails}
+                                        {product.product_details}
                                     </Card.Text>
                                     <Button variant="danger" onClick={()=> this.deleteProduct(product.id)}>Remove Product</Button>
                                 </Card.Body>
