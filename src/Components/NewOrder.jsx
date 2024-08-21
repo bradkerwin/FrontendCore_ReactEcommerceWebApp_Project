@@ -27,7 +27,10 @@ class NewOrder extends Component {
 
             const orderData = {
                 order_date: this.state.orderDate.trim(),
+                customer_id: this.state.customerId.trim(),
+                product_id: this.state.productId.trim(),
             };
+            console.log(orderData);
 
             axios.post('http://127.0.0.1:5000/orders', orderData)
                 .then(() => {
@@ -86,7 +89,7 @@ class NewOrder extends Component {
                         <Form.Label>
                             Enter Your Customer ID
                         </Form.Label>
-                        <Form.Control type="text" name="customerID" value={customerId} onChange={this.handleChange} />
+                        <Form.Control type="text" name="customerId" value={customerId} onChange={this.handleChange} />
                         {errors.customerId && <div style={{ color: 'red'}}>{errors.customerId}</div>}
                     </Form.Group>
 
@@ -103,7 +106,7 @@ class NewOrder extends Component {
                             Enter Today&lsquo;s Date
                         </Form.Label>
                         <Form.Control type="date" name="orderDate" value={orderDate} onChange={this.handleChange} />
-                        {errors.productDetails && <div style={{ color: 'red'}}>{errors.productDetails}</div>}
+                        {errors.orderDate && <div style={{ color: 'red'}}>{errors.orderDate}</div>}
                     </Form.Group>
 
                     <Button className="mt-3" variant="primary" type="submit">Submit</Button>

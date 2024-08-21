@@ -7,6 +7,8 @@ class OrdersList extends Component {
         super(props);
         this.state = {
             orders: [],
+            customerId: '',
+            productId: '',
             selectedOrderId: null,
             error: null
         };
@@ -29,7 +31,7 @@ class OrdersList extends Component {
     }
 
     deleteOrder = (orderId) => {
-        axios.delete(`http://127.0.0.1:5000/orders/${orderId}`)
+        axios.delete(`http://127.0.0.1:5000/orders/${orderId}`)        
              .then(() => {
                  this.fetchOrders();
              })
@@ -54,12 +56,12 @@ class OrdersList extends Component {
                             <Card style={{ width: '18rem' }}>
                                 <Card.Img variant="top" src="holder.js/100px180" />
                                 <Card.Body>
-                                    <Card.Title>{order.id}</Card.Title>
+                                    <Card.Title>Order ID: {order.id}</Card.Title>
                                     <Card.Text>
-                                        {customer.id} <br/>
-                                        {product.id}
+                                        Customer ID: {order.customer_id} <br/>
+                                        Product ID: {order.product_id}
                                     </Card.Text>
-                                    <Button variant="danger" onClick={()=> this.deleteOrder(order.id)}>Remove Order</Button>
+                                    <Button variant="danger" onClick={()=> this.deleteOrder(order.id)}>Cancel Order</Button>
                                 </Card.Body>
                                 </Card>
                         </ListGroup.Item>
