@@ -17,14 +17,6 @@ class CustomerSchema(ma.Schema):
     class Meta:
         fields = ('id', 'name', 'email', 'phone')
 
-class OrderSchema(ma.Schema):
-    id = fields.Integer(required= False)
-    order_date_ = fields.Date(required= False)
-    customer_id = fields.Integer(required= True)
-    product_id = fields.Integer(required=True)
-    class Meta:
-        fields = ('id', 'order_date', 'customer_id', 'product_id')
-
 class ProductSchema(ma.Schema):
     id = fields.Integer(required= False)
     product_name = fields.String(required= True)
@@ -32,6 +24,14 @@ class ProductSchema(ma.Schema):
     product_details = fields.String()
     class Meta:
         fields = ('id', 'product_name', 'price', 'product_details')
+
+class OrderSchema(ma.Schema):
+    id = fields.Integer(required= False)
+    order_date_ = fields.Date(required= True)
+    customer_id = fields.Integer(required= True)
+    product_id = fields.Integer(required=True)
+    class Meta:
+        fields = ('id', 'order_date', 'customer_id', 'product_id')
 
 customer_schema = CustomerSchema()
 customers_schema = CustomerSchema(many = True)
@@ -175,6 +175,7 @@ def delete_customer(id):
         customer = cursor.fetchone()
         if not customer:
             return jsonify({"error": "Customer not found"}), 404
+        
         query = "DELETE FROM Customers WHERE id = %s"
         cursor.execute(query, customer_to_remove)
         conn.commit()
@@ -319,6 +320,48 @@ def remove_product(id):
             conn.close()
 
 # Orders Table:
+@app.route("/orders", methods=['GET'])
+def retrieve_orders():
+    try:
+        conn = get_db_connection()
+        if conn is None:
+            return jsonify({"error": "Database connection failed"}), 500
+        cursor = conn.cursor(dictionary=True)
+        query = "SELECT * FROM orders"
+        cursor.execute(query)
+        orders = cursor.fetchall()
+        return orders_schema.jsonify(orders)
+
+    except Error as e:
+        print(f"Error: {e}")
+        return jsonify({"error": "Internal Server Error"}), 500
+
+    finally:
+        if conn and conn.is_connected():
+            cursor.close()
+            conn.close()
+
+@app.route("/orders/<int:id>", methods= ['GET'])
+def get_order(id):
+    try:
+        conn = get_db_connection()
+        if conn is None:
+            return jsonify({"error": "Database connection failed"}), 500
+        cursor = conn.cursor(dictionary=True)
+        order_to_get = (id, )
+        cursor.execute("SELECT * FROM orders WHERE id =%s", order_to_get)
+        order = cursor.fetchall()
+        return orders_schema.jsonify(order)
+
+    except Error as e:
+        print(f"Error: {e}")
+        return jsonify({"error": "Internal Server Error"}), 500
+
+    finally:
+        if conn and conn.is_connected():
+            cursor.close()
+            conn.close()
+
 @app.route('/orders', methods=['POST'])
 def add_order():
     try:
@@ -346,17 +389,50 @@ def add_order():
             cursor.close()
             conn.close()
 
-@app.route("/orders", methods=['GET'])
-def retrieve_orders():
+@app.route('/orders/<int:id>', methods=['PUT'])
+def update_order(id):
+    try:
+        order_info = order_schema.load(request.json)
+    except ValidationError as e:
+        print(f"Error: {e}")
+        return jsonify(e.messages), 400
+
     try:
         conn = get_db_connection()
         if conn is None:
             return jsonify({"error": "Database connection failed"}), 500
-        cursor = conn.cursor(dictionary=True)
-        query = "SELECT * FROM orders"
-        cursor.execute(query)
-        orders = cursor.fetchall()
-        return orders_schema.jsonify(orders)
+        cursor = conn.cursor()
+        updated_order = (order_info['order_date'], order_info['customer_id'], order_info['product_id'], id)
+        query = "UPDATE ORDERS SET order_date = %s, customer_id = %s, product_id = %s WHERE id = %s"
+        cursor.execute(query, updated_order)
+        conn.commit()
+        return jsonify({"message": "Order info updated successfully"}), 200
+
+    except Error as e:
+        print(f"Error: {e}")
+        return jsonify({"error": "Internal Server Error"}), 500
+
+    finally:
+        if conn and conn.is_connected():
+            cursor.close()
+            conn.close()
+
+@app.route('/orders/<int:id>', methods=['DELETE'])
+def delete_order(id):
+    try:
+        conn = get_db_connection()
+        if conn is None:
+            return jsonify({"error": "Database connection failed"}), 500
+        cursor = conn.cursor()
+        order_to_remove = (id, )
+        cursor.execute("SELECT * FROM orders WHERE id = %s", order_to_remove)
+        order = cursor.fetchone()
+        if not order:
+            return jsonify({"error": "Order not found"}), 404
+        query = "DELETE FROM orders WHERE id = %s"
+        cursor.execute(query, order_to_remove)
+        conn.commit()
+        return jsonify({"message": "Order removed successfully"}), 200
 
     except Error as e:
         print(f"Error: {e}")

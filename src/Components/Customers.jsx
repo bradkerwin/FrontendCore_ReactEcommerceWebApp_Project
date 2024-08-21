@@ -51,7 +51,7 @@ class CustomerList extends Component {
                 <h3>Customers</h3>
                 <ListGroup>
                     {customers.map(customer => (
-                        <ListGroup.Item key={customer.id} className="d-flex justify-content-between">
+                        <ListGroup.Item key={customer.id} className="d-flex justify-content-between align-items-center shadow-sm p-3 mb-3 bg-white rounded">
                             <Card style={{ width: '18rem' }}>
                                 <Card.Img variant="top" src="holder.js/100px180" />
                                 <Card.Body>

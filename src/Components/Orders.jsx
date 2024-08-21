@@ -47,12 +47,13 @@ class OrdersList extends Component {
         return (
             <Container>
                 {error && <Alert variant='danger'>{error}</Alert> }
-                <h3>Orders</h3>
+                <h3>Existing Orders</h3>
+                <h2 className='mt-4'>View and Modify Existing Orders Here</h2>
                 <ListGroup>
                     {orders.map(order => (
                         <ListGroup.Item key={order.id} className="d-flex justify-content-between align-items-center shadow-sm p-3 mb-3 bg-white rounded">
                             <Link to={`/edit-order/${order.id}`} className='text-primary'>{order.name}</Link>
-                            <Button variant="outline-danger" size="sm" onClick={()=> this.deleteOrder(order.id)}>Delete</Button>
+                            <Button variant="danger" size="sm" onClick={()=> this.deleteOrder(order.id)}>Remove Order</Button>
                         </ListGroup.Item>
                     ))}
                 </ListGroup>

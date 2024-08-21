@@ -25,11 +25,11 @@ function NavigationBar() {
                     </Nav.Link>
 
                     <Nav.Link as= {NavLink} to="/orders" activeclassname="active">
-                    Orders
+                    Existing Orders
                     </Nav.Link>
 
                     <Nav.Link as= {NavLink} to="/neworder" activeclassname="active">
-                    Add New Orders
+                    Add New Order
                     </Nav.Link>
 
                     <Nav.Link as= {NavLink} to="/" activeclassname="active">
