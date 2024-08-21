@@ -28,6 +28,10 @@ function NavigationBar() {
                     Orders
                     </Nav.Link>
 
+                    <Nav.Link as= {NavLink} to="/neworder" activeclassname="active">
+                    Add New Orders
+                    </Nav.Link>
+
                     <Nav.Link as= {NavLink} to="/" activeclassname="active">
                     Home
                     </Nav.Link>

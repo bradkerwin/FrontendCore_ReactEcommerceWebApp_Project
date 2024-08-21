@@ -77,7 +77,7 @@ class NewOrder extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="formGroupOrderDate">
                         <Form.Label>
-                            Enter Today's Date
+                            Enter Today&lsquo;s Date
                         </Form.Label>
                         <Form.Control type="date" name="orderDate" value={orderDate} onChange={this.handleChange} />
                         {errors.productDetails && <div style={{ color: 'red'}}>{errors.productDetails}</div>}
