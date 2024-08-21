@@ -1,6 +1,5 @@
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { ListGroup, Button, Container, Alert } from 'react-bootstrap';
+import { ListGroup, Button, Container, Alert, Card } from 'react-bootstrap';
 import axios from 'axios';
 
 class OrdersList extends Component {
@@ -52,8 +51,17 @@ class OrdersList extends Component {
                 <ListGroup>
                     {orders.map(order => (
                         <ListGroup.Item key={order.id} className="d-flex justify-content-between align-items-center shadow-sm p-3 mb-3 bg-white rounded">
-                            <Link to={`/edit-order/${order.id}`} className='text-primary'>{order.name}</Link>
-                            <Button variant="danger" size="sm" onClick={()=> this.deleteOrder(order.id)}>Remove Order</Button>
+                            <Card style={{ width: '18rem' }}>
+                                <Card.Img variant="top" src="holder.js/100px180" />
+                                <Card.Body>
+                                    <Card.Title>{order.id}</Card.Title>
+                                    <Card.Text>
+                                        {customer.id} <br/>
+                                        {product.id}
+                                    </Card.Text>
+                                    <Button variant="danger" onClick={()=> this.deleteOrder(order.id)}>Remove Order</Button>
+                                </Card.Body>
+                                </Card>
                         </ListGroup.Item>
                     ))}
                 </ListGroup>

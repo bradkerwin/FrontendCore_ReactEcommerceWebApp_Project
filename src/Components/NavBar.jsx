@@ -8,6 +8,10 @@ function NavigationBar() {
             <Navbar.Toggle aria-controls="basic-navbar-nav"></Navbar.Toggle>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
+                    <Nav.Link as= {NavLink} to="/" activeclassname="active">
+                    Home
+                    </Nav.Link>
+                    
                     <Nav.Link as= {NavLink} to="/newcustomer" activeclassname="active">
                     Add New Customer
                     </Nav.Link>
@@ -24,17 +28,14 @@ function NavigationBar() {
                     View Our Products
                     </Nav.Link>
 
-                    <Nav.Link as= {NavLink} to="/orders" activeclassname="active">
-                    Existing Orders
-                    </Nav.Link>
-
                     <Nav.Link as= {NavLink} to="/neworder" activeclassname="active">
                     Add New Order
                     </Nav.Link>
 
-                    <Nav.Link as= {NavLink} to="/" activeclassname="active">
-                    Home
+                    <Nav.Link as= {NavLink} to="/orders" activeclassname="active">
+                    Existing Orders
                     </Nav.Link>
+
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
