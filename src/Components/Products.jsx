@@ -47,7 +47,7 @@ class ProductList extends Component {
 
             <Container>
                 {error && <Alert variant='danger'>{error}</Alert> }
-                <h3>Shop Our Fine Products</h3>
+                <h3 className='m-3'>Shop Our Fine Products</h3>
                 <ListGroup>
                     {products.map(product => (
                         <ListGroup.Item key={product.id} className="d-flex justify-content-between align-items-center shadow-sm p-3 mb-3 bg-white rounded">
@@ -56,8 +56,9 @@ class ProductList extends Component {
                                 <Card.Body>
                                     <Card.Title>{product.product_name}</Card.Title>
                                     <Card.Text>
-                                        {product.price} <br/>
-                                        {product.product_details}
+                                        Product ID: {product.id} <br/>
+                                        Price: {product.price} <br/>
+                                        Details: {product.product_details}
                                     </Card.Text>
                                     <Button variant="danger" onClick={()=> this.deleteProduct(product.id)}>Remove Product</Button>
                                 </Card.Body>

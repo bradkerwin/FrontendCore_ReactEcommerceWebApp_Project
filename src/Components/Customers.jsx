@@ -48,7 +48,7 @@ class CustomerList extends Component {
 
             <Container>
                 {error && <Alert variant='danger'>{error}</Alert> }
-                <h3>Customers</h3>
+                <h3 className='m-3'>Customers</h3>
                 <ListGroup>
                     {customers.map(customer => (
                         <ListGroup.Item key={customer.id} className="d-flex justify-content-between align-items-center shadow-sm p-3 mb-3 bg-white rounded">
@@ -57,8 +57,9 @@ class CustomerList extends Component {
                                 <Card.Body>
                                     <Card.Title>{customer.name}</Card.Title>
                                     <Card.Text>
-                                        {customer.email} <br/>
-                                        {customer.phone}
+                                        Customer ID: {customer.id} <br/>
+                                        Email: {customer.email} <br/>
+                                        Phone: {customer.phone}
                                     </Card.Text>
                                     <Button variant="danger" onClick={()=> this.deleteCustomer(customer.id)}>Remove Customer</Button>
                                 </Card.Body>

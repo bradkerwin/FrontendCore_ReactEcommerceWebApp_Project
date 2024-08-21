@@ -81,6 +81,7 @@ class NewOrder extends Component {
                 {error && <Alert variant="danger">Error Submitting Order: {error}</Alert>}
 
                 <Form onSubmit={this.handleSubmit}>
+                    <h2 className='m-3'>Place a New Order Here</h2>
                     <Form.Group controlId="formGroupCustomerId">
                         <Form.Label>
                             Enter Your Customer ID
@@ -91,7 +92,7 @@ class NewOrder extends Component {
 
                     <Form.Group controlId="formGroupProductId">
                         <Form.Label>
-                            Enter The ID of the Product You Would Like to Purchase
+                            Enter The ID of the Product You Would Like to Purchase*
                         </Form.Label>
                         <Form.Control type="text" name="productId" value={productId} onChange={this.handleChange} />
                         {errors.productId && <div style={{ color: 'red'}}>{errors.productId}</div>}
@@ -122,7 +123,10 @@ class NewOrder extends Component {
                         <Button variant="secondary" onClick={this.closeModal}>Close</Button>
                     </Modal.Footer>
                 </Modal>
-                
+                <p className='mt-4'>*Product ID&lsquo;s are used to distinguish 
+                similar products from one another. We request that you enter the
+                ID to simply make it easier to guarantee order accuracy. Each 
+                product&lsquo;s ID is indicated on the Products page.</p>
             </Container>
         );
     }
