@@ -1,6 +1,8 @@
 Welcome to my EComm API. It is set up like an online store for customers to
-view a product catalog and make purchases. The NavBar.jsx creates the navigation
-bar at the top of the page which allows the user to navigate the website. 
+view a product catalog and make purchases. The back end is run by the server.py 
+file. The NavBar.jsx creates the navigation bar at the top of the page which 
+allows the user to navigate the website. 
+
 Homepage.jsx simply takes the user home. New customers are added via the 
 NewCustomer.jsx file and Customers.jsx allows one to view all existing customers
 and their info. 

@@ -129,7 +129,8 @@ class NewOrder extends Component {
                 <p className='mt-4'>*Product ID&lsquo;s are used to distinguish 
                 similar products from one another. We request that you enter the
                 ID to simply make it easier to guarantee order accuracy. Each 
-                product&lsquo;s ID is indicated on the Products page.</p>
+                product&lsquo;s ID is indicated on the <b>View Our Products </b>  
+                page.</p>
             </Container>
         );
     }
